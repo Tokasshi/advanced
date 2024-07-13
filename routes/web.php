@@ -43,7 +43,7 @@ Route::get('ki/{name}', function ($name) {
 
 
 
-////////.........TASK TWO.............////////////////////
+
 Route::prefix('company')->group(function () {
     Route::get('', function () {
         return 'Company Index';
@@ -58,6 +58,7 @@ Route::prefix('company')->group(function () {
     });
 });
 
+////////.........TASK TWO.............////////////////////
 Route::prefix('accounts')->group(function () {
     Route::get('', function () {
         return 'Accounts Index';
