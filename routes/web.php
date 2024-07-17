@@ -1,14 +1,39 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+
+Route:: get('login', [ExampleController::class, 'login' ] );
+
+Route:: get('cv', [ExampleController::class, 'cv'] );
+
+////////////////......TASK THREE............//////////////
+//view contact us page
+Route::get('contactus', [ExampleController::class, 'contactus']); 
+//request and extract data inserted in contact us form
+Route:: post('data', [ExampleController::class, 'data' ] )->name('data');
+
+
+
+
+
+
+
+
+/////////////////////////////........SESSIONS...........//////////////////////
+
+Route:: get('welcome', function() {
+    return 'welcome to laravel';
+})->name('w');
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('w', function () {
-//     return 'Hello summoner';
-// });
+Route::get('w', function () {
+    return 'Hello summoner';
+});
 
 // Route :: get('cars/{id?}', function($id=0){
 //  return 'car number is' . $id;
@@ -109,3 +134,28 @@ Route::prefix('cars')->group(function () {
         });
     });
 });
+
+///////////////////////........................session three............................./////////////////////////////
+// Route:: fallback(function(){
+//     return redirect('/');
+// });
+
+Route:: get('link', function() {
+    $url= route('w');
+    return "<a href='$url'> go to welcome </a>";
+});
+
+Route:: get('welcome', function() {
+    return 'welcome to laravel';
+})->name('w');
+
+Route:: get('link', function() {
+    $url= route('w');
+    return "<a href='$url'> go to welcome </a>";
+});
+
+Route::post('log', function () {
+    return 'logged in succsesfully ';
+})->name('log');
+
+
