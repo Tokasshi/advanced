@@ -25,7 +25,7 @@ class ExampleController extends Controller
     $sub = request('sub');
     $mes= request('message');
     $data = 'the data you inserted is: ' . '<br>' . 'Name: '. $name . '<br>' . 'E-mail:' .$email . '<br>' . 'Subject: '.$sub . '<br>'. 'Message:'.$mes;
-    return $data;
+    return $data;   
     }
 
 }
