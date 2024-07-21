@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 
 class ExampleController extends Controller
 {
-    function login() {
-        return view('login');
-    }
+
 
     function cv() {
         return view('cv');
@@ -28,4 +26,12 @@ class ExampleController extends Controller
     return $data;   
     }
 
+    function login() {
+        return view('login');
+    }
+
+    function recieve(Request $request) {
+        return $request['email']. '<br>' . $request['pwd'];
+    
+    }
 }

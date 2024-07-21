@@ -2,17 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\ClassController;
 
-Route:: get('login', [ExampleController::class, 'login' ] );
 
 Route:: get('cv', [ExampleController::class, 'cv'] );
+
+//////////////////////////////.................TASK FOUR...................................///////////////////////////////////
+Route::get('class/create', [ClassController::class,'create']);
+Route::POST('classes', [ClassController::class,'store'])->name('classes.store');
+
+
 
 ////////////////......TASK THREE............//////////////
 //view contact us page
 Route::get('contactus', [ExampleController::class, 'contactus']); 
 //request and extract data inserted in contact us form
 Route:: post('data', [ExampleController::class, 'data' ] )->name('data');
+//login nour way 
+//first view login page
+Route:: get('login', [ExampleController::class, 'login' ] );
+//request data 
+Route::post('log',[ExampleController::class, 'recieve'])->name('log');
 
+///////////////////.................TASK FOUR..............................//////////////////////
 
 
 
@@ -154,8 +167,7 @@ Route:: get('link', function() {
     return "<a href='$url'> go to welcome </a>";
 });
 
-Route::post('log', function () {
-    return 'logged in succsesfully ';
-})->name('log');
-
+/////////////////////////////.................session four.....................//////////////////////////////
+Route::get('car/create', [CarController::class,'create']);
+Route::POST('cars', [CarController::class,'store'])->name('cars.store');
 
