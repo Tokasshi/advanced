@@ -8,6 +8,12 @@ use App\Http\Controllers\ClassController;
 
 Route:: get('cv', [ExampleController::class, 'cv'] );
 
+//////////////////////////.....................TASK FIVE............................///////////////////////////////
+//view classes index
+Route::get('classes', [ClassController::class,'index']);
+//go to edit data form 
+Route::get('classes/{id}', [ClassController::class,'edit'])->name('edit.class');
+
 //////////////////////////////.................TASK FOUR...................................///////////////////////////////////
 Route::get('class/create', [ClassController::class,'create']);
 Route::POST('classes', [ClassController::class,'store'])->name('classes.store');
