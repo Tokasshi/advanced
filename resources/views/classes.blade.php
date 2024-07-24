@@ -29,6 +29,7 @@
             <tr class="table-dark">
               <th scope="col">Class Name</th>
               <th scope="col">Price</th>
+              <th scope="col">Capacity</th>
               <th scope="col">Description</th>
               <th scope="col">Full</th>
               <th scope="col">Edit</th>
@@ -40,6 +41,7 @@
             <tr>
               <td scope="row">{{$class['className']}}</td>
               <td>{{$class['price']}}</td>
+              <td>{{$class['capacity']}}</td>
               <td>{{Str::limit($class['description'], 20)}}</td>
               <td>{{($class['full']==1) ? "Yes" : "No"}}</td>
               <td> <a href="{{route('edit.class', $class['id'])}}">Edit</a></td>
