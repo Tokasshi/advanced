@@ -32,7 +32,9 @@
               <th scope="col">Capacity</th>
               <th scope="col">Description</th>
               <th scope="col">Full</th>
+              <th scope="col">Details</th>
               <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +46,16 @@
               <td>{{$class['capacity']}}</td>
               <td>{{Str::limit($class['description'], 20)}}</td>
               <td>{{($class['full']==1) ? "Yes" : "No"}}</td>
+              <td> <a href="{{route('class.details', $class['id'])}}">Show Details</a></td>
               <td> <a href="{{route('edit.class', $class['id'])}}">Edit</a></td>
+              <td  <a href="" onclick="confirm('Are you sure you want to delete?')"></a>
+              <form action="{{ route('destroy.class', $class['id']) }}" method="post">
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="id" value="{{ $class->id }}">
+              <input type="submit" value="delete">
+              </form>
+              </td>
             </tr>
             @endforeach
           </tbody>

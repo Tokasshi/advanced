@@ -6,11 +6,16 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 
 
-Route:: get('cv', [ExampleController::class, 'cv'] );
+////////////////////////////////////................TASK SIX........................///////////////////////////////////
+Route::put('class/{id}/update', [ClassController::class,'update'])->name('update.class');
+Route :: get('class/{id}/details', [ClassController::class,'show'])->name('class.details');
+Route :: delete('class/{id}/delete', [ClassController::class,'destroy'])->name('destroy.class');
+Route :: get('classes/trashed', [ClassController::class,'showDelete'])->name('showDelete');
+
 
 //////////////////////////.....................TASK FIVE............................///////////////////////////////
 //view classes index
-Route::get('classes', [ClassController::class,'index']);
+Route::get('classes', [ClassController::class,'index'])->name('classes.index');
 //go to edit data form 
 Route::get('classes/{id}', [ClassController::class,'edit'])->name('edit.class');
 
@@ -40,6 +45,7 @@ Route::post('log',[ExampleController::class, 'recieve'])->name('log');
 
 
 /////////////////////////////........SESSIONS...........//////////////////////
+Route:: get('cv', [ExampleController::class, 'cv'] );
 
 Route:: get('welcome', function() {
     return 'welcome to laravel';
@@ -117,7 +123,7 @@ Route::prefix('accounts')->group(function () {
     });
 });
 
-Route::prefix('cars')->group(function () {
+Route::prefix('car')->group(function () {
     Route::get('', function () {
         return 'Cars Index';
     });
@@ -177,3 +183,16 @@ Route:: get('link', function() {
 Route::get('car/create', [CarController::class,'create']);
 Route::POST('cars', [CarController::class,'store'])->name('cars.store');
 
+////////////////////////........................SESSION FIVE...............................///////////////////
+////view classes index
+// Route::get('classes', [ClassController::class,'index']);
+Route:: get ('cars', [CarController::class,'index'])->name('cars.index');
+//go to edit data form 
+// Route::get('classes/{id}', [ClassController::class,'edit'])->name('edit.class');
+Route :: get('car/{id}', [CarController::class,'edit'])->name('edit.car');
+
+/////////////////////////.................SESSION SIX...............///////////////////////////
+Route::put('car/{id}/update', [CarController::class,'update'])->name('update.car');
+Route :: get('car/{id}/details', [CarController::class,'show'])->name('car.details');
+Route :: delete('car/{id}/delete', [CarController::class,'destroy'])->name('destroy.car');
+Route :: get('cars/trashed', [CarController::class,'showDelete'])->name('showDelete');
