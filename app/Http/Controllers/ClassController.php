@@ -29,14 +29,14 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        $data=[
-            'className'=>$request->className,
-            'description'=>$request->description,
-            'capacity'=>$request->capacity,
-            'price'=>$request->price,
-            'full'=>isset($request->full),
-            ];
+        $data= $request->validate([
+            'className'=>'required|string',
+            'description'=>'required|string|max:500',
+            'price'=>'required| numeric',
+            'capacity'=>'required| numeric',
+        ]);
         
+        $data['full']= isset($request->full);
         Classe::create($data);
 
         return redirect()-> route('classes.index');
@@ -65,15 +65,17 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
     
-        $data=[
-            'className'=>$request->className,
-            'description'=>$request->description,
-            'capacity'=>$request->capacity,
-            'price'=>$request->price,
-            'full'=>isset($request->full),
-            ];
-        Classe::where('id', $id)->update($data);
+        $data= $request->validate([
+            'className'=>'required|string',
+            'description'=>'required|string|max:500',
+            'price'=>'required| numeric',
+            'capacity'=>'required| numeric',
+        ]);
+        
+        $data['full']= isset($request->full);
+        Classe::create($data);
 
         return redirect()-> route('classes.index');
     }
@@ -92,5 +94,17 @@ class ClassController extends Controller
         $classes= Classe:: onlyTrashed()-> get();
 
         return view('trashedClasses', compact('classes'));
+    }
+
+    public function restore(string $id)
+    {
+        classe:: where('id', $id)->restore();
+        return redirect()-> route('classes.index');
+    }
+
+    public function forceDelete(string $id) 
+    {
+        classe:: where('id', $id)->forceDelete();
+        return redirect()-> route('classes.index');
     }
 }

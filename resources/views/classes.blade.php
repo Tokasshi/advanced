@@ -48,7 +48,7 @@
               <td>{{($class['full']==1) ? "Yes" : "No"}}</td>
               <td> <a href="{{route('class.details', $class['id'])}}">Show Details</a></td>
               <td> <a href="{{route('edit.class', $class['id'])}}">Edit</a></td>
-              <td  <a href="" onclick="confirm('Are you sure you want to delete?')"></a>
+              <td  <a href="" onclick="return confirm('Are you sure you want to delete?')"></a>
               <form action="{{ route('destroy.class', $class['id']) }}" method="post">
               @csrf
               @method('DELETE')
