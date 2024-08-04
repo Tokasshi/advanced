@@ -32,7 +32,8 @@
               <th scope="col">Capacity</th>
               <th scope="col">Description</th>
               <th scope="col">Full</th>
-              <th scope="col">Details</th>
+              <th scope="col">Restore</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +45,19 @@
               <td>{{$class['capacity']}}</td>
               <td>{{Str::limit($class['description'], 20)}}</td>
               <td>{{($class['full']==1) ? "Yes" : "No"}}</td>
-              <td> <a href="{{route('class.details', $class['id'])}}">Show Details</a></td>
+              <td> <form action="{{route('class.restore', $class ['id'])}}" method="post">
+              @csrf 
+              @method('patch')
+              <button type="submit" class="btn btn-link m-0 p-0"> Restore</button>
+              </form> 
+              </td>
+              <td  <a href="" onclick="return confirm('Are you sure you want to delete?')"></a>
+              <form action="{{ route('permdelete.class', $class['id']) }}" method="post">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-link m-0 p-0"> Permenant Delete</button>
+              </form>
+              </td>
             </tr>
             @endforeach
           </tbody>
