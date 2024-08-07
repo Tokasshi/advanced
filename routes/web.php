@@ -3,17 +3,21 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+//////////////////////////////////......................TASK NINE..................................////////////////////////////////
+Route::get('Product/create', [ProductController::class, 'create'])->name('product.create');
+Route::get('products', [ProductController::class, 'index']);
+// Route::get('/latest-products', [ProductController::class, 'latest']);
+Route::POST('products', [ProductController::class, 'store'])->name('product.store');
 
 //////////////////////////////////////................TASK EIGHT......................./////////////////////////////
 //error handling and validation stuff
 //upload image file
 
 /////////////////////////////////////...................TASK SEVEN...................../////////////////////////////
-Route:: patch('class/{id}', [ClassController::class,'restore'])->name('class.restore');
+Route::patch('class/{id}', [ClassController::class, 'restore'])->name('class.restore');
 Route::delete('class/{id}/permenant', [ClassController::class, 'forceDelete'])->name('permdelete.class');
-
-
 
 ////////////////////////////////////................TASK SIX........................///////////////////////////////////
 Route::put('class/{id}/update', [ClassController::class, 'update'])->name('update.class');
@@ -192,9 +196,11 @@ Route::get('car/{id}/details', [CarController::class, 'show'])->name('car.detail
 Route::delete('car/{id}/delete', [CarController::class, 'destroy'])->name('destroy.car');
 Route::get('cars/trashed', [CarController::class, 'showDelete'])->name('showDelete');
 ////////////////////////...................SESSION SEVEN................///////////////////////////
-Route:: patch('car/{id}', [CarController::class,'restore'])->name('car.restore');
+Route::patch('car/{id}', [CarController::class, 'restore'])->name('car.restore');
 Route::delete('car/{id}/permenant', [CarController::class, 'forceDelete'])->name('permdelete.car');
 ////////////////////////...................SESSION EIGHT................///////////////////////////
 
-Route:: get('uploadform', [ExampleController::class,'uploadForm']);
-Route:: post('upload', [ExampleController::class,'upload'])->name('upload');
+Route::get('uploadform', [ExampleController::class, 'uploadForm']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
+///////////////////////////.................SESSION NINE.....................///////////////////////////////
+Route::get('index', [ExampleController::class, 'index']);
