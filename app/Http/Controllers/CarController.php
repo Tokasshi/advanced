@@ -34,6 +34,7 @@ class CarController extends Controller
             'description'=>$request->description,
             'price'=>$request->price,
             'published'=>isset($request->published),
+            
             ];
         
         Car::create($data);
@@ -90,5 +91,17 @@ class CarController extends Controller
         $cars= car:: onlyTrashed()-> get();
 
         return view('trashedCars', compact('cars'));
+    }
+
+    public function restore(string $id)
+    {
+        car:: where('id', $id)->restore();
+        return redirect()-> route('cars.index');
+    }
+
+    public function forceDelete(string $id) 
+    {
+        car:: where('id', $id)->forceDelete();
+        return redirect()-> route('cars.index');
     }
 }

@@ -17,5 +17,6 @@ class Classe extends Model
         'capacity',
         'price',
         'full',
+        'image',
     ];
 }

@@ -29,18 +29,32 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        $data= $request->validate([
-            'className'=>'required|string',
-            'description'=>'required|string|max:500',
-            'price'=>'required| numeric',
-            'capacity'=>'required| numeric',
+        $data = $request->validate([
+            'className' => 'required|string',
+            'description' => 'required|string|max:500',
+            'price' => 'required|numeric',
+            'capacity' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
-        $data['full']= isset($request->full);
+    
+        // Handle image upload if provided
+        if ($request->hasFile('image')) {
+            $file_extension = $request->image->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'assets/images';
+            $request->image->move($path, $file_name);
+            $data['image'] = $path . '/' . $file_name;
+        } else {
+            unset($data['image']); //lw mfesh image uploaded
+        }
+    
+        $data['full'] = isset($request->full);
+    
         Classe::create($data);
-
-        return redirect()-> route('classes.index');
+    
+        return redirect()->route('classes.index');
     }
+    
 
     /**
      * Display the specified resource.
@@ -72,11 +86,21 @@ class ClassController extends Controller
             'description'=>'required|string|max:500',
             'price'=>'required| numeric',
             'capacity'=>'required| numeric',
+            'image'=> 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
-        $data['full']= isset($request->full);
-        Classe::create($data);
+        if ($request->hasFile('image')) {
+            $file_extension = $request->image->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'assets/images';
+            $request->image->move($path, $file_name);
+            $data['image'] = $path . '/' . $file_name;
+        }
 
+        $data['full']= isset($request->full);
+
+        dd($request->all(), $data); //msh sh8ala brdo
+
+        Classe::where('id', $id)->update($data);
         return redirect()-> route('classes.index');
     }
 
