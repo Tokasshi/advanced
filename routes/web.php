@@ -3,17 +3,25 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+
+
+//////////////////////////////////......................TASK NINE & TEN..................................////////////////////////////////
+Route::get('products/create', [ProductController::class, 'create']);
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::POST('products', [ProductController::class, 'store'])->name('products.store');
+//edit
+Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+Route::put('product/{id}/update', [ProductController::class, 'update'])->name('product.update');
 
 //////////////////////////////////////................TASK EIGHT......................./////////////////////////////
 //error handling and validation stuff
 //upload image file
 
 /////////////////////////////////////...................TASK SEVEN...................../////////////////////////////
-Route:: patch('class/{id}', [ClassController::class,'restore'])->name('class.restore');
+Route::patch('class/{id}', [ClassController::class, 'restore'])->name('class.restore');
 Route::delete('class/{id}/permenant', [ClassController::class, 'forceDelete'])->name('permdelete.class');
-
-
 
 ////////////////////////////////////................TASK SIX........................///////////////////////////////////
 Route::put('class/{id}/update', [ClassController::class, 'update'])->name('update.class');
@@ -192,9 +200,13 @@ Route::get('car/{id}/details', [CarController::class, 'show'])->name('car.detail
 Route::delete('car/{id}/delete', [CarController::class, 'destroy'])->name('destroy.car');
 Route::get('cars/trashed', [CarController::class, 'showDelete'])->name('showDelete');
 ////////////////////////...................SESSION SEVEN................///////////////////////////
-Route:: patch('car/{id}', [CarController::class,'restore'])->name('car.restore');
+Route::patch('car/{id}', [CarController::class, 'restore'])->name('car.restore');
 Route::delete('car/{id}/permenant', [CarController::class, 'forceDelete'])->name('permdelete.car');
 ////////////////////////...................SESSION EIGHT................///////////////////////////
 
-Route:: get('uploadform', [ExampleController::class,'uploadForm']);
-Route:: post('upload', [ExampleController::class,'upload'])->name('upload');
+Route::get('uploadform', [ExampleController::class, 'uploadForm']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
+///////////////////////////.................SESSION NINE.....................///////////////////////////////
+Route::get('index', [ExampleController::class, 'index']);
+//////////////////////////////......................SESSION TEN.............................///////////////////////////////
+Route::get('about', [ExampleController::class, 'about']);

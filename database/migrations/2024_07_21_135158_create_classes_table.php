@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('capacity');
             $table->float('price');
             $table->boolean('full');
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->softDeletes();
             // $table->timestamp('timeTo');
             // $table->timestamp('timeFr');
