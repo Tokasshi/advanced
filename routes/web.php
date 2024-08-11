@@ -5,11 +5,15 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-//////////////////////////////////......................TASK NINE..................................////////////////////////////////
-Route::get('Product/create', [ProductController::class, 'create'])->name('product.create');
-Route::get('products', [ProductController::class, 'index']);
-// Route::get('/latest-products', [ProductController::class, 'latest']);
-Route::POST('products', [ProductController::class, 'store'])->name('product.store');
+
+
+//////////////////////////////////......................TASK NINE & TEN..................................////////////////////////////////
+Route::get('products/create', [ProductController::class, 'create']);
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::POST('products', [ProductController::class, 'store'])->name('products.store');
+//edit
+Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+Route::put('product/{id}/update', [ProductController::class, 'update'])->name('product.update');
 
 //////////////////////////////////////................TASK EIGHT......................./////////////////////////////
 //error handling and validation stuff
@@ -204,3 +208,5 @@ Route::get('uploadform', [ExampleController::class, 'uploadForm']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 ///////////////////////////.................SESSION NINE.....................///////////////////////////////
 Route::get('index', [ExampleController::class, 'index']);
+//////////////////////////////......................SESSION TEN.............................///////////////////////////////
+Route::get('about', [ExampleController::class, 'about']);

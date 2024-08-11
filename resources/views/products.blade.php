@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All classes</title>
+  <title>All Prpducts</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,8 +32,8 @@
               <th scope="col">Description</th>
               <th scope="col">Published</th>
               <!-- <th scope="col">Details</th> -->
-              <!-- <th scope="col">Edit</th> -->
-              <th scope="col">Delete</th>
+              <th scope="col">Edit</th>
+              <!-- <th scope="col">Delete</th> -->
             </tr>
           </thead>
           <tbody>
@@ -44,12 +44,13 @@
               <td>{{$product['price']}}</td>
               <td>{{Str::limit($product['description'], 20)}}</td>
               <td>{{($product['published']==1) ? "Yes" : "No"}}</td>
-              <td  <a href="" onclick="return confirm('Are you sure you want to delete?')"></a>
+              <td> <a href="{{route('product.edit', $product['id'])}}">Edit</a></td>
+              <!-- <td  <a href="" onclick="return confirm('Are you sure you want to delete?')"></a>
               <form action="" method="post">
               <input type="hidden" name="id" value="{{ $product->id }}">
               <input type="submit" value="delete">
               </form>
-              </td>
+              </td> -->
             </tr>
             @endforeach
           </tbody>

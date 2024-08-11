@@ -14,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products= Product::get();
-        return view('index', compact('products'));
+        $products = Product::get();
+        return view('products', compact('products'));
     }
 
     /**
@@ -33,25 +33,18 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string',
-            'description' => 'required|string|max:100',
+            'description' => 'required|string|max:500',
             'price' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $data['published'] = isset($request->published);
+        $data['published'] = isset($request->full);
         $data['image'] = $this->uploadFile($request->image, 'assets/images');
         Product::create($data);
 
-        return 'data was inserted';
-        // return redirect()->route('products.index');
+        return redirect()->route('products.index');
     }
 
-    // public function latest()
-    // {
-    //     //a5er 3 items added
-    //     $products = Product::latest()->take(3)->get();
-    //     return view('products.latest', compact('products'));
-    // }
 
     /**
      * Display the specified resource.
@@ -66,7 +59,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('edit_product', compact('product'));
     }
 
     /**
@@ -74,7 +68,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string|max:500',
+            'price' => 'required| numeric',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        }
+
+        $data['published'] = isset($request->published);
+        
+        Product::where('id', $id)->update($data);
+        return redirect()->route('products.index');
     }
 
     /**
