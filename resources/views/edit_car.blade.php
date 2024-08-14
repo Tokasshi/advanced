@@ -24,21 +24,22 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Edit Car</h2>
-        <form action="{{route('update.car',  ['id' => $car->id])}}" method="post" class="px-md-5">
+        <form action="{{route('update.car',  ['id' => $car->id])}}" method="post" class="px-md-5" enctype="multipart/form-data">
           @csrf
           @method('put')
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" class="form-control py-2" name="carTitle" value="{{$car->carTitle}}"/>
+              <input type="text" placeholder="BMW" class="form-control py-2" name="carTitle"  value="{{ old('carTitle', $car->carTitle) }}"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{$car->price}}" />
+              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price"value="{{ old('price', $car->price) }}" />
             </div>
           </div>
+
 
           <div class="form-group mb-3 row">
     <label for="select-option1" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
@@ -46,7 +47,8 @@
         <select class="form-control" id="select-option1" name="catId">
             <option value="">Select Category</option>
             @foreach ($categories as $category)
-                <option value="{{ $category->id }}" {{ $category->id == $car->catId ? 'selected' : '' }}>
+                <option value="{{ $category->id }}" 
+                        @selected($category->id == $car->catId)>
                     {{ $category->catName }}
                 </option>
             @endforeach
@@ -54,11 +56,10 @@
     </div>
 </div>
 
-
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
-              <textarea id="" cols="30" rows="5" class="form-control py-2" name="description">{{$car->description}}</textarea>
+              <textarea id="" cols="30" rows="5" class="form-control py-2" name="description">{{ old('description', $car->description) }}</textarea>
             </div>
           </div>
           <hr>
