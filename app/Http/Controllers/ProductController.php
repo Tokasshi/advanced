@@ -39,7 +39,7 @@ class ProductController extends Controller
         ]);
 
         $data['published'] = isset($request->full);
-        $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        $data['image'] = $this->uploadFile($request->image, 'assets/images/product');
         Product::create($data);
 
         return redirect()->route('products.index');
@@ -75,7 +75,7 @@ class ProductController extends Controller
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+            $data['image'] = $this->uploadFile($request->image, 'assets/images/product');
         }
 
         $data['published'] = isset($request->published);

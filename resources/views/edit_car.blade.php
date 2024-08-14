@@ -39,6 +39,22 @@
               <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{$car->price}}" />
             </div>
           </div>
+
+          <div class="form-group mb-3 row">
+    <label for="select-option1" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+    <div class="col-md-10">
+        <select class="form-control" id="select-option1" name="catId">
+            <option value="">Select Category</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" {{ $category->id == $car->catId ? 'selected' : '' }}>
+                    {{ $category->catName }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
@@ -52,6 +68,22 @@
               <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" @checked($car->published) />
             </div>
           </div>
+          <div class="form-group mb-3 row">
+                    <label for="" class="form-label col-md-2 fw-bold text-md-end">Current Image:</label>
+                    <div class="col-md-10">
+                        @if($car->image)
+                            <img src="{{ asset('storage/' . $car->image) }}" alt="Current Image" style="max-width: 200px;">
+                        @else
+                            <p>No image uploaded</p>
+                        @endif
+                    </div>
+                </div>
+          <div class="form-group mb-3 row">
+                    <label class="form-label col-md-2 fw-bold text-md-end" for="image">Upload New Image:</label>
+                    <div class="col-md-10">
+                        <input type="file" class="form-control" id="image" name="image" value="{{ old('image', $car->image) }}">
+                    </div>
+                </div>
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
               Edit Car
