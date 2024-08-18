@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Traits\Common;
 use App\Models\Car;
+use App\Models\Category;
+
 
 class CarController extends Controller
 {
+    use Common;
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +26,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_cars');
+        $categories =Category::select('id','catName')->get();
+        return view('add_cars', compact('categories'));
     }
 
     /**
@@ -29,17 +35,20 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $data=[
-            'carTitle'=>$request->carTitle,
-            'description'=>$request->description,
-            'price'=>$request->price,
-            'published'=>isset($request->published),
-            
-            ];
-        
+        // dd($request->all());
+        $data = $request->validate([
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:500',
+            'price' => 'required|numeric',
+            'catId' =>'required|exists:categories,id',
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+
+        ]);
+        $data['published'] = isset($request->published);
+        $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
         Car::create($data);
 
-        return redirect()-> route('cars.index');
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -56,8 +65,9 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
+        $categories =Category::select('id','catName')->get();
         $car= Car::findOrFail($id);
-        return view('edit_car', compact('car'));
+        return view('edit_car', compact('car', 'categories'));
     }
 
     /**
@@ -65,16 +75,22 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data=[
-            'carTitle'=>$request->carTitle,
-            'description'=>$request->description,
-            'price'=>$request->price,
-            'published'=>isset($request->published),
-            ];
-        
-        Car::where('id', $id)->update($data);
+        // dd($request->all());
+        $data = $request->validate([
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:500',
+            'price' => 'required|numeric',
+            'catId' =>'required|exists:categories,id',
+            'image' => 'sometimes|mimes:jpeg,png,jpg,gif|max:2048',
 
-        return redirect()-> route('cars.index');
+        ]);
+        $data['published'] = isset($request->published);
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        }// dd($data);
+
+        Car::where('id', $id)->update($data);
+        return redirect()->route('cars.index');
     }
 
     /**

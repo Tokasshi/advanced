@@ -210,3 +210,5 @@ Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 Route::get('index', [ExampleController::class, 'index']);
 //////////////////////////////......................SESSION TEN.............................///////////////////////////////
 Route::get('about', [ExampleController::class, 'about']);
+///////////////////////////...............SESSION ELEVEN...............//////////////////////////////////////
+Route::get ('one', [ExampleController::class, 'test']);

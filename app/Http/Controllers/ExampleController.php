@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Models\Phone;
+use App\Models\Car;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ExampleController extends Controller
@@ -62,4 +66,12 @@ class ExampleController extends Controller
     {
         return view('about');
     }  
+
+    public function test(){
+        dd(Student::find(1), Student::find(1)?->phone);
+    }
+
+    public function findt(){
+        dd(Student::find(1), Student::find(1)?->phone);
+    }
 }
