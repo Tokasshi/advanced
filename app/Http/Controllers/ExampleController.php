@@ -2,14 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUs;
 use App\Models\Student;
 use App\Models\Phone;
 use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ExampleController extends Controller
 {
+
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    public function send()
+    {
+    $data =request()->validate([
+        'name'=>'required|min:3',
+        'email'=>'required|email',
+        'sub'=>'required|min:3',
+        'message'=>'required|max:500',
+    ]);
+    Mail::to('hello@example.com')->send(new ContactUs($data));
+    // dd('send');
+    return 'your mail has been delivered';
+    }
+    
 
     public function cv()
     {

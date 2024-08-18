@@ -26,7 +26,7 @@
         <div class="card bg-light border-0">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 col-10 position-relative overflow-hidden">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROYjj94a1EKPObxDQCbqSdwmIbkhQt5Np5lQ&s"
+              <img src="{{asset('assets/images/cars/' . $car->image) }}"
                 alt="" class="card-img"
                 style="position: absolute; margin: auto; top: 50%; transform: translateY(-50%); width: 100%;height: 100%; object-fit: cover;" />
             </div>
@@ -43,9 +43,16 @@
               </div>
               <div class="mb-4">
                 <p class="card-text">
+                  <span class="fw-bold">Category:</span> {{$car->category->catName}}
+                </p>
+              </div>
+
+              <div class="mb-4">
+                <p class="card-text">
                   <span class="fw-bold">Published:</span> {{ $car->published ? 'Yes' : 'No' }}
                 </p>
               </div>
+
               <div class="mb-4">
                 <p class="card-text">
                   <span class="fw-bold">Description:</span><br>{{$car['description']}}

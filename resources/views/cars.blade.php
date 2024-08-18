@@ -28,6 +28,7 @@
           <thead>
             <tr class="table-dark">
               <th scope="col">Car Title</th>
+              <th scope="col">Category</th>
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
@@ -40,6 +41,7 @@
           @foreach($cars as $car)
             <tr>
               <td scope="row">{{$car['carTitle']}}</td>
+              <td>{{$car->category->catName}}</td>
               <td>{{$car['price']}}</td>
               <td>{{Str::limit($car['description'], 20)}}</td>
               <td>{{($car['published']==1) ? "Yes" : "No"}}</td>
