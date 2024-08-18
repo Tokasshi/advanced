@@ -4,10 +4,21 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ProductController;
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+
+
+//////////////////////////////////......................TASK 12..................................////////////////////////////////
+Route::get('contact-us', [ExampleController::class, 'contact'])->name('contact');
+Route::post('sent', [ExampleController::class, 'send'])->name('send');
+
+
+
 
 
 //////////////////////////////////......................TASK NINE & TEN..................................////////////////////////////////
+
 Route::get('products/create', [ProductController::class, 'create']);
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 Route::POST('products', [ProductController::class, 'store'])->name('products.store');
@@ -53,7 +64,7 @@ Route::post('log', [ExampleController::class, 'recieve'])->name('log');
 ///////////////////.................TASK FOUR..............................//////////////////////
 
 /////////////////////////////........SESSIONS...........//////////////////////
-Route::get('cv', [ExampleController::class, 'cv']);
+Route::get('cv', [ExampleController::class, 'cv'])->middleware('verified');
 
 Route::get('welcome', function () {
     return 'welcome to laravel';
@@ -212,3 +223,6 @@ Route::get('index', [ExampleController::class, 'index']);
 Route::get('about', [ExampleController::class, 'about']);
 ///////////////////////////...............SESSION ELEVEN...............//////////////////////////////////////
 Route::get ('one', [ExampleController::class, 'test']);
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

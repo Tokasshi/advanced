@@ -73,7 +73,7 @@
                     <label for="" class="form-label col-md-2 fw-bold text-md-end">Current Image:</label>
                     <div class="col-md-10">
                         @if($car->image)
-                            <img src="{{ asset('storage/' . $car->image) }}" alt="Current Image" style="max-width: 200px;">
+                            <img src="{{ asset('assets/images/cars/' . $car->image) }}" alt="Current Image" style="max-width: 200px;">
                         @else
                             <p>No image uploaded</p>
                         @endif
